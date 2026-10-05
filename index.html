@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pesquisa de opinião</title>
+<meta name="description" content="Pesquisa de opinião independente. Anônima, sem cadastro, leva cerca de 3 minutos.">
+<meta property="og:title" content="Pesquisa de opinião">
+<meta property="og:description" content="Anônima, sem cadastro, leva cerca de 3 minutos.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f5f2">
+<style>
+/* Uma pergunta por tela, botões grandes, só fontes do sistema (carrega rápido no navegador do Instagram/Facebook).
+   Paleta neutra de propósito: nada que lembre cor de partido. */
+:root {
+  --bg: #f6f5f2;
+  --card: #ffffff;
+  --ink: #17201f;
+  --ink-2: #4d5655;
+  --muted: #7b8382;
+  --line: #dcdedb;
+  --accent: #0f6b6b;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3f0ef;
+  --erro: #a33a2b;
+  --f: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121615; --card: #1b2120; --ink: #eef2f1; --ink-2: #c2cac8; --muted: #8d9695;
+    --line: #2e3635; --accent: #4fb3ad; --accent-ink: #0b1514; --accent-soft: #1f3331; --erro: #f08a78;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 400 1.0625rem/1.5 var(--f); padding: env(safe-area-inset-top, 0) 16px calc(24px + env(safe-area-inset-bottom, 0)); }
+main { max-width: 34rem; margin: 0 auto; }
+header.topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 10px; }
+.marca { font-weight: 700; letter-spacing: .01em; }
+.passo { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.barra { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 22px; }
+.barra i { display: block; height: 100%; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+@media (prefers-reduced-motion: reduce) { .barra i { transition: none; } }
+h1 { font-size: 1.75rem; line-height: 1.2; margin: 6px 0 12px; text-wrap: balance; }
+h2 { font-size: 1.375rem; line-height: 1.25; margin: 0 0 18px; text-wrap: balance; }
+p { margin: 0 0 12px; }
+.sub { color: var(--ink-2); }
+.pequeno { font-size: .85rem; color: var(--ink-2); }
+ul.garantias { padding: 0; margin: 14px 0 18px; list-style: none; display: grid; gap: 8px; }
+ul.garantias li { padding-left: 26px; position: relative; }
+ul.garantias li::before { content: "✓"; position: absolute; left: 4px; color: var(--accent); font-weight: 700; }
+.opcoes { display: grid; gap: 10px; border: 0; padding: 0; margin: 0; }
+.opcoes legend { padding: 0; }
+.opcao { display: flex; align-items: center; gap: 12px; padding: 15px 16px; background: var(--card); border: 1.5px solid var(--line);
+         border-radius: 10px; cursor: pointer; min-height: 56px; }
+.opcao:hover { border-color: var(--muted); }
+.opcao input { width: 20px; height: 20px; margin: 0; accent-color: var(--accent); flex: none; }
+.opcao:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.opcao:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.campo { display: grid; gap: 8px; }
+select, input[type="number"] {
+  font: inherit; color: var(--ink); background: var(--card); border: 1.5px solid var(--line); border-radius: 10px;
+  padding: 14px 14px; width: 100%; min-height: 54px;
+}
+select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.aceite { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--card);
+          border: 1.5px solid var(--line); border-radius: 10px; margin: 16px 0; cursor: pointer; }
+.aceite input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
+.acoes { display: flex; gap: 10px; margin-top: 22px; }
+button { font: 600 1.0625rem var(--f); border-radius: 10px; padding: 14px 18px; min-height: 52px; cursor: pointer; }
+button.principal { background: var(--accent); color: var(--accent-ink); border: 0; flex: 1; }
+button.principal:disabled { opacity: .45; cursor: not-allowed; }
+button.voltar { background: transparent; color: var(--ink-2); border: 1.5px solid var(--line); }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.erro { color: var(--erro); font-size: .85rem; min-height: 1.4em; margin-top: 8px; }
+.codigo { font: 700 1.375rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; background: var(--card);
+          border: 1.5px dashed var(--line); border-radius: 10px; padding: 12px 16px; display: inline-block; margin: 6px 0 14px; }
+a { color: var(--accent); }
+.faltando { color: var(--erro); font-weight: 600; }
+footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
+[hidden] { display: none !important; }
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+<main>
+  <header class="topo">
+    <span class="marca" data-config="nome">Pesquisa de opinião</span>
+    <span class="passo" id="passo" aria-live="polite"></span>
+  </header>
+  <div class="barra" aria-hidden="true"><i id="progresso"></i></div>
+
+  <!-- Abertura e consentimento (LGPD, art. 11, I: consentimento específico e destacado) -->
+  <section id="tela-inicio">
+    <h1>Eleição para presidente: queremos ouvir você</h1>
+    <p class="sub">Leva cerca de 3 minutos. É uma pesquisa independente, sem ligação com partidos, candidatos ou governos.</p>
+    <ul class="garantias">
+      <li>Não pedimos nome, telefone, e-mail nem CPF.</li>
+      <li>As respostas ficam guardadas com proteção e servem só para estatística.</li>
+      <li>Esta é uma fase de teste: os resultados não serão divulgados.</li>
+      <li>Você pode parar quando quiser.</li>
+    </ul>
+    <p class="pequeno">Suas respostas incluem opinião política, que a LGPD trata como dado pessoal sensível. Responsável: <span data-config="responsavel"></span> (<span data-config="contato"></span>). Veja a <a href="privacidade.html">política de privacidade</a>.</p>
+    <label class="aceite" for="aceite">
+      <input type="checkbox" id="aceite">
+      <span>Tenho 18 anos ou mais, li as informações acima e concordo em participar.</span>
+    </label>
+    <div class="acoes"><button class="principal" id="comecar" type="button" disabled>Começar</button></div>
+  </section>
+
+  <!-- Perguntas: montadas pelo script a partir de PERGUNTAS -->
+  <section id="tela-pergunta" hidden>
+    <form id="form" novalidate>
+      <div id="corpo"></div>
+      <p class="erro" id="erro" role="alert"></p>
+      <div class="acoes">
+        <button class="voltar" id="voltar" type="button">Voltar</button>
+        <button class="principal" id="avancar" type="submit">Continuar</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="tela-enviando" hidden>
+    <h2>Enviando…</h2>
+    <p class="sub">Só um instante.</p>
+  </section>
+
+  <section id="tela-falha" hidden>
+    <h2>Não conseguimos enviar</h2>
+    <p class="sub">Confira a sua conexão e tente de novo. Suas respostas continuam aqui.</p>
+    <div class="acoes"><button class="principal" id="reenviar" type="button">Tentar de novo</button></div>
+  </section>
+
+  <section id="tela-fim" hidden>
+    <h1>Obrigado!</h1>
+    <p class="sub">Sua resposta foi registrada.</p>
+    <p class="pequeno">Código da sua resposta:</p>
+    <span class="codigo" id="codigo">—</span>
+    <p class="pequeno">Guarde este código se quiser pedir a exclusão das suas respostas, pelo contato <span data-config="contato"></span>.</p>
+  </section>
+
+  <section id="tela-ja-respondeu" hidden>
+    <h1>Você já respondeu</h1>
+    <p class="sub">Esta pesquisa já foi respondida neste aparelho. Obrigado pela participação!</p>
+  </section>
+
+  <section id="tela-menor" hidden>
+    <h1>Obrigado pelo interesse</h1>
+    <p class="sub">Esta pesquisa é só para pessoas com 18 anos ou mais.</p>
+  </section>
+
+  <footer><a href="privacidade.html">Política de privacidade</a></footer>
+</main>
+
+<script>
+(() => {
+  const C = window.PESQUISA;
+  const $ = id => document.getElementById(id);
+  const embaralhar = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* navegador sem armazenamento */ } };
+  const ler = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const novoId = () => (crypto.randomUUID ? crypto.randomUUID()
+    : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
+
+  // Textos que vêm do config.js
+  document.title = C.nome;
+  document.querySelectorAll('[data-config]').forEach(el => {
+    const v = C[el.dataset.config];
+    if (v) el.textContent = v;
+    else { el.textContent = '[preencher em config.js]'; el.classList.add('faltando'); }
+  });
+
+  // Origem do acesso (parâmetros do anúncio)
+  const q = new URLSearchParams(location.search);
+  const origem = {
+    utm_source: q.get('utm_source'), utm_campaign: q.get('utm_campaign'),
+    utm_content: q.get('utm_content'), utm_term: q.get('utm_term'),
+    veio_do_meta: q.has('fbclid') || q.get('utm_source') === 'meta',
+  };
+  const dispositivo = matchMedia('(pointer: coarse)').matches ? 'celular' : 'computador';
+  let dispositivoId = ler('pesquisa_dispositivo');
+  if (!dispositivoId) { dispositivoId = novoId(); guardar('pesquisa_dispositivo', dispositivoId); }
+
+  // Ordem sorteada para não favorecer quem aparece primeiro
+  const flavioPrimeiro = Math.random() < 0.5;
+  const dupla = flavioPrimeiro
+    ? [['flavio', 'Flávio Bolsonaro (PL)'], ['lula', 'Lula (PT)']]
+    : [['lula', 'Lula (PT)'], ['flavio', 'Flávio Bolsonaro (PL)']];
+  const UFS = [['AC','Acre'],['AL','Alagoas'],['AP','Amapá'],['AM','Amazonas'],['BA','Bahia'],['CE','Ceará'],['DF','Distrito Federal'],
+    ['ES','Espírito Santo'],['GO','Goiás'],['MA','Maranhão'],['MT','Mato Grosso'],['MS','Mato Grosso do Sul'],['MG','Minas Gerais'],
+    ['PA','Pará'],['PB','Paraíba'],['PR','Paraná'],['PE','Pernambuco'],['PI','Piauí'],['RJ','Rio de Janeiro'],['RN','Rio Grande do Norte'],
+    ['RS','Rio Grande do Sul'],['RO','Rondônia'],['RR','Roraima'],['SC','Santa Catarina'],['SP','São Paulo'],['SE','Sergipe'],['TO','Tocantins']];
+  const DIAS = embaralhar([['segunda', 'Segunda-feira'], ['quarta', 'Quarta-feira'], ['sexta', 'Sexta-feira'], ['domingo', 'Domingo']]);
+
+  // Política primeiro (sem influência das perguntas de perfil); perfil socioeconômico no fim.
+  const PERGUNTAS = [
+    { id: 'uf', tipo: 'lista', titulo: 'Em qual estado você vota?', opcoes: UFS, vazio: 'Escolha o estado' },
+    { id: 'idade', tipo: 'numero', titulo: 'Qual é a sua idade?', min: 18, max: 110 },
+    { id: 'sexo', titulo: 'Você é:', opcoes: [['feminino', 'Mulher'], ['masculino', 'Homem'], ['outro', 'Outro / prefiro não dizer']] },
+    { id: 'voto_2t', titulo: 'Se o 2º turno da eleição para presidente fosse hoje, em quem você votaria?',
+      opcoes: [...dupla, ['branco_nulo', 'Votaria em branco ou anularia'], ['nao_sabe', 'Ainda não sei']] },
+    { id: 'certeza_2t', titulo: 'Esse voto já está decidido ou ainda pode mudar?',
+      se: r => r.voto_2t === 'flavio' || r.voto_2t === 'lula',
+      opcoes: [['definitivo', 'Já está decidido'], ['pode_mudar', 'Ainda pode mudar']] },
+    { id: 'rejeicao', titulo: 'Em qual destes você não votaria de jeito nenhum?',
+      opcoes: [...dupla, ['ambos', 'Não votaria em nenhum dos dois'], ['nenhum', 'Poderia votar em qualquer um dos dois'], ['nao_sabe', 'Não sei']] },
+    { id: 'votou_1t', titulo: 'Você votou no 1º turno, em 4 de outubro?',
+      opcoes: [['sim', 'Sim'], ['nao', 'Não'], ['nao_dizer', 'Prefiro não dizer']] },
+    { id: 'voto_1t', titulo: 'Em quem você votou para presidente no 1º turno?', se: r => r.votou_1t === 'sim',
+      opcoes: [...embaralhar([['flavio', 'Flávio Bolsonaro (PL)'], ['lula', 'Lula (PT)'], ['cury', 'Augusto Cury (Avante)'],
+        ['renan', 'Renan Santos (Missão)'], ['caiado', 'Ronaldo Caiado (PSD)'], ['zema', 'Romeu Zema (Novo)']]),
+        ['outro', 'Outro candidato'], ['branco_nulo', 'Votei em branco ou anulei'], ['nao_dizer', 'Prefiro não dizer']] },
+    { id: 'chance_votar', titulo: 'Qual a chance de você ir votar no 2º turno, em 25 de outubro?',
+      opcoes: [['certeza_sim', 'Vou com certeza'], ['provavel_sim', 'Provavelmente vou'], ['provavel_nao', 'Provavelmente não vou'], ['certeza_nao', 'Com certeza não vou']] },
+    { id: 'atencao', titulo: 'Para mostrar que você está lendo com atenção, escolha “Quarta-feira”.', opcoes: DIAS },
+    { id: 'local_moradia', titulo: 'Onde você mora?',
+      opcoes: [['capital', 'Na capital do estado'], ['metropolitana', 'Em outra cidade da região metropolitana da capital'], ['interior', 'No interior']] },
+    { id: 'escolaridade', titulo: 'Até onde você estudou?',
+      opcoes: [['fund_incompleto', 'Não terminei o ensino fundamental'], ['fund_completo', 'Terminei o fundamental (ou comecei o médio)'],
+        ['medio', 'Terminei o ensino médio'], ['superior_incompleto', 'Comecei a faculdade, mas não terminei'], ['superior', 'Terminei a faculdade (ou mais)']] },
+    { id: 'renda', titulo: 'Somando a renda de todos que moram com você, quanto a sua família ganha por mês?',
+      opcoes: [['ate2', 'Até 2 salários mínimos'], ['2a5', 'De 2 a 5 salários mínimos'], ['5a10', 'De 5 a 10 salários mínimos'],
+        ['mais10', 'Mais de 10 salários mínimos'], ['nao_dizer', 'Prefiro não dizer']] },
+    { id: 'religiao', titulo: 'Qual é a sua religião?',
+      opcoes: [['catolica', 'Católica'], ['evangelica', 'Evangélica'], ['outra', 'Outra religião'], ['sem_religiao', 'Não tenho religião'], ['nao_dizer', 'Prefiro não dizer']] },
+  ];
+
+  const resp = {};
+  let pos = 0, inicio = 0;
+  const visiveis = () => PERGUNTAS.filter(p => !p.se || p.se(resp));
+  const telas = ['tela-inicio', 'tela-pergunta', 'tela-enviando', 'tela-falha', 'tela-fim', 'tela-ja-respondeu', 'tela-menor'];
+  function mostrar(id) {
+    telas.forEach(t => { $(t).hidden = t !== id; });
+    if (id !== 'tela-pergunta') { $('passo').textContent = ''; $('progresso').style.transform = `scaleX(${id === 'tela-fim' ? 1 : 0})`; }
+    window.scrollTo(0, 0);
+  }
+
+  function desenhar() {
+    const lista = visiveis(), p = lista[pos];
+    $('passo').textContent = `${pos + 1} de ${lista.length}`;
+    $('progresso').style.transform = `scaleX(${pos / lista.length})`;
+    $('erro').textContent = '';
+    $('voltar').hidden = pos === 0;
+    const corpo = $('corpo');
+    corpo.replaceChildren();
+    if (p.tipo === 'lista') {
+      corpo.innerHTML = `<div class="campo"><h2><label for="f-${p.id}">${p.titulo}</label></h2><select id="f-${p.id}" name="${p.id}"><option value="">${p.vazio}</option>${p.opcoes.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></div>`;
+      if (resp[p.id]) corpo.querySelector('select').value = resp[p.id];
+    } else if (p.tipo === 'numero') {
+      corpo.innerHTML = `<div class="campo"><h2><label for="f-${p.id}">${p.titulo}</label></h2><input type="number" inputmode="numeric" id="f-${p.id}" name="${p.id}" min="${p.min}" max="${p.max}" placeholder="Ex.: 42"></div>`;
+      if (resp[p.id]) corpo.querySelector('input').value = resp[p.id];
+    } else {
+      corpo.innerHTML = `<fieldset class="opcoes"><legend><h2>${p.titulo}</h2></legend>${p.opcoes.map(([v, t], i) =>
+        `<label class="opcao" for="f-${p.id}-${i}"><input type="radio" name="${p.id}" id="f-${p.id}-${i}" value="${v}"${resp[p.id] === v ? ' checked' : ''}><span>${t}</span></label>`).join('')}</fieldset>`;
+    }
+    const foco = corpo.querySelector('select, input');
+    if (foco && p.tipo) foco.focus();
+  }
+
+  function valorAtual(p) {
+    if (p.tipo === 'lista' || p.tipo === 'numero') return $('f-' + p.id).value.trim();
+    const m = document.querySelector(`input[name="${p.id}"]:checked`);
+    return m ? m.value : '';
+  }
+
+  $('aceite').addEventListener('change', e => { $('comecar').disabled = !e.target.checked; });
+  $('comecar').addEventListener('click', () => { inicio = Date.now(); pos = 0; mostrar('tela-pergunta'); desenhar(); });
+  $('voltar').addEventListener('click', () => { if (pos > 0) { pos--; desenhar(); } });
+
+  // Escolha única avança sozinha, com um pequeno atraso para o toque ser visto.
+  $('corpo').addEventListener('change', e => {
+    if (e.target.type !== 'radio') return;
+    const naPergunta = pos;
+    setTimeout(() => {
+      if (pos !== naPergunta || $('tela-pergunta').hidden) return;
+      const f = $('form');
+      if (f.requestSubmit) f.requestSubmit(); else $('avancar').click();
+    }, 180);
+  });
+
+  $('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const lista = visiveis(), p = lista[pos], v = valorAtual(p);
+    if (!v) { $('erro').textContent = p.tipo === 'numero' ? 'Digite a sua idade.' : 'Escolha uma opção para continuar.'; return; }
+    if (p.tipo === 'numero') {
+      const n = Number(v);
+      if (!Number.isInteger(n) || n > p.max) { $('erro').textContent = 'Digite a idade em anos, só números.'; return; }
+      if (n < p.min) { mostrar('tela-menor'); return; }
+      resp[p.id] = n;
+    } else {
+      resp[p.id] = v;
+    }
+    // Respostas de perguntas que deixaram de valer (ex.: mudou o voto) são descartadas no envio.
+    if (pos < visiveis().length - 1) { pos++; desenhar(); }
+    else enviar();
+  });
+
+  async function enviar() {
+    mostrar('tela-enviando');
+    const valem = new Set(visiveis().map(p => p.id));
+    const dados = {
+      versao: C.versao, consentimento: true, ...origem, dispositivo, dispositivo_id: dispositivoId,
+      ordem_2t: flavioPrimeiro ? 'flavio_primeiro' : 'lula_primeiro',
+      tempo_segundos: Math.round((Date.now() - inicio) / 1000),
+      atencao_ok: resp.atencao === 'quarta',
+    };
+    for (const [k, v] of Object.entries(resp)) if (valem.has(k) && k !== 'atencao') dados[k] = v;
+    try {
+      const r = await fetch(C.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dados) });
+      const j = await r.json();
+      if (!r.ok || !j.ok) throw new Error(j.erro || r.status);
+      guardar('pesquisa_respondida', C.versao);
+      $('codigo').textContent = j.codigo;
+      mostrar('tela-fim');
+    } catch (err) {
+      mostrar('tela-falha');
+    }
+  }
+  $('reenviar').addEventListener('click', enviar);
+
+  if (ler('pesquisa_respondida') === C.versao) mostrar('tela-ja-respondeu');
+})();
+</script>
+</body>
+</html>

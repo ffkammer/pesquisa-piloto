@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Política de privacidade</title>
+<meta name="robots" content="noindex">
+<style>
+:root { --bg: #f6f5f2; --ink: #17201f; --ink-2: #4d5655; --line: #dcdedb; --accent: #0f6b6b; --erro: #a33a2b;
+        --f: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #121615; --ink: #eef2f1; --ink-2: #c2cac8; --line: #2e3635; --accent: #4fb3ad; --erro: #f08a78; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 400 1rem/1.6 var(--f); padding: 16px 16px calc(32px + env(safe-area-inset-bottom, 0)); }
+main { max-width: 40rem; margin: 0 auto; }
+h1 { font-size: 1.6rem; line-height: 1.2; margin: 12px 0 6px; }
+h2 { font-size: 1.1rem; margin: 26px 0 6px; }
+p, li { color: var(--ink-2); }
+ul { padding-left: 1.2em; }
+a { color: var(--accent); }
+.faltando { color: var(--erro); font-weight: 600; }
+.voltar { display: inline-block; margin-top: 28px; }
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+<main>
+  <p><a href="index.html">← Voltar para a pesquisa</a></p>
+  <h1>Política de privacidade</h1>
+  <p><span data-config="nome"></span> · pesquisa-piloto sobre a eleição presidencial de 2026.</p>
+
+  <h2>Quem é responsável pelos dados</h2>
+  <p><span data-config="responsavel"></span>, contato: <span data-config="contato"></span>. É para esse contato que você envia dúvidas e pedidos sobre os seus dados.</p>
+
+  <h2>O que coletamos</h2>
+  <ul>
+    <li>As suas respostas: estado, idade, sexo, onde mora, escolaridade, renda familiar, religião, voto no 1º turno e intenção de voto no 2º turno.</li>
+    <li>De onde você veio (por exemplo, qual anúncio levou até a pesquisa) e se acessou pelo celular ou pelo computador.</li>
+    <li>Um identificador aleatório guardado no seu navegador, para evitar que a mesma pessoa responda duas vezes.</li>
+    <li>Uma versão embaralhada (hash) do endereço IP, que não permite recuperar o IP original. Serve para detectar envios automáticos em massa.</li>
+  </ul>
+  <p>Não pedimos nome, telefone, e-mail, CPF nem localização exata. Não usamos cookies de rastreamento nem pixels de redes sociais.</p>
+
+  <h2>Para que usamos</h2>
+  <p>Só para calcular estatísticas sobre a opinião do eleitorado, nesta fase de teste do método. Os resultados não serão divulgados publicamente. Nenhuma resposta individual é mostrada a ninguém.</p>
+
+  <h2>Base legal</h2>
+  <p>Opinião política é dado pessoal sensível (Lei 13.709/2018, art. 5º, II). Tratamos esses dados com o seu consentimento específico e destacado (art. 11, I), dado na tela inicial da pesquisa. Você pode retirar o consentimento a qualquer momento pelo contato acima.</p>
+
+  <h2>Onde os dados ficam e com quem são compartilhados</h2>
+  <p>As respostas ficam em um banco de dados do Supabase, em servidores em São Paulo, com acesso restrito ao responsável. O site é hospedado em um serviço de páginas estáticas. Não vendemos nem compartilhamos as respostas com partidos, candidatos, empresas ou governos.</p>
+
+  <h2>Por quanto tempo</h2>
+  <p>As respostas individuais serão apagadas até <span data-config="apagarAte"></span>. Depois disso ficam apenas números agregados, sem nenhuma resposta individual.</p>
+
+  <h2>Seus direitos</h2>
+  <p>Você pode pedir acesso, correção ou exclusão das suas respostas (art. 18). Como a pesquisa é anônima, guarde o código que aparece ao final do questionário e envie-o ao contato acima: é assim que localizamos a sua resposta.</p>
+
+  <h2>Segurança</h2>
+  <p>A tabela de respostas não pode ser lida nem alterada pela internet. As respostas só são gravadas por uma função no servidor que confere cada campo, e o acesso aos dados exige uma chave secreta.</p>
+
+  <a class="voltar" href="index.html">← Voltar para a pesquisa</a>
+</main>
+<script>
+  const C = window.PESQUISA;
+  document.querySelectorAll('[data-config]').forEach(el => {
+    const v = C[el.dataset.config];
+    if (v) el.textContent = v;
+    else { el.textContent = '[preencher em config.js]'; el.classList.add('faltando'); }
+  });
+</script>
+</body>
+</html>
