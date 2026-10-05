@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pesquisa de opinião</title>
+<title>Brasil Responde · Pesquisa de opinião</title>
 <meta name="description" content="Pesquisa de opinião independente. Anônima, sem cadastro, leva cerca de 3 minutos.">
-<meta property="og:title" content="Pesquisa de opinião">
+<meta property="og:site_name" content="Brasil Responde">
+<meta property="og:title" content="Brasil Responde · Pesquisa de opinião">
 <meta property="og:description" content="Anônima, sem cadastro, leva cerca de 3 minutos.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f6f5f2">
@@ -86,7 +87,7 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
 <body>
 <main>
   <header class="topo">
-    <span class="marca" data-config="nome">Pesquisa de opinião</span>
+    <span class="marca" data-config="nome">Brasil Responde</span>
     <span class="passo" id="passo" aria-live="polite"></span>
   </header>
   <div class="barra" aria-hidden="true"><i id="progresso"></i></div>
@@ -164,7 +165,7 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
     : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
 
   // Textos que vêm do config.js
-  document.title = C.nome;
+  document.title = C.nome + ' · Pesquisa de opinião';
   document.querySelectorAll('[data-config]').forEach(el => {
     const v = C[el.dataset.config];
     if (v) el.textContent = v;
