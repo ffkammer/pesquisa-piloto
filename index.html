@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Brasil Responde · Pesquisa de opinião</title>
-<meta name="description" content="Pesquisa de opinião independente. Anônima, sem cadastro, leva cerca de 3 minutos.">
+<meta name="description" content="Pesquisa de opinião independente. Anônima, sem cadastro, leva cerca de 1 minuto.">
 <meta property="og:site_name" content="Brasil Responde">
 <meta property="og:title" content="Brasil Responde · Pesquisa de opinião">
-<meta property="og:description" content="Anônima, sem cadastro, leva cerca de 3 minutos.">
+<meta property="og:description" content="Anônima, sem cadastro, leva cerca de 1 minuto.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f6f5f2">
 <style>
@@ -95,7 +95,7 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
   <!-- Abertura e consentimento (LGPD, art. 11, I: consentimento específico e destacado) -->
   <section id="tela-inicio">
     <h1>Eleição para presidente: queremos ouvir você</h1>
-    <p class="sub">Leva cerca de 3 minutos. É uma pesquisa independente, sem ligação com partidos, candidatos ou governos.</p>
+    <p class="sub">Leva cerca de 1 minuto. É uma pesquisa independente, sem ligação com partidos, candidatos ou governos.</p>
     <ul class="garantias">
       <li>Não pedimos nome, telefone, e-mail nem CPF.</li>
       <li>As respostas ficam guardadas com proteção e servem só para estatística.</li>
@@ -105,7 +105,7 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
     <p class="pequeno">Suas respostas incluem opinião política, que a LGPD trata como dado pessoal sensível. Responsável: <span data-config="responsavel"></span> (<span data-config="contato"></span>). Veja a <a href="privacidade.html">política de privacidade</a>.</p>
     <label class="aceite" for="aceite">
       <input type="checkbox" id="aceite">
-      <span>Tenho 18 anos ou mais, li as informações acima e concordo em participar.</span>
+      <span>Li as informações acima e concordo em participar.</span>
     </label>
     <div class="acoes"><button class="principal" id="comecar" type="button" disabled>Começar</button></div>
   </section>
@@ -148,7 +148,7 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
 
   <section id="tela-menor" hidden>
     <h1>Obrigado pelo interesse</h1>
-    <p class="sub">Esta pesquisa é só para pessoas com 18 anos ou mais.</p>
+    <p class="sub">Esta pesquisa é para eleitores, que podem votar a partir dos 16 anos.</p>
   </section>
 
   <footer><a href="privacidade.html">Política de privacidade</a></footer>
@@ -194,18 +194,13 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
     ['RS','Rio Grande do Sul'],['RO','Rondônia'],['RR','Roraima'],['SC','Santa Catarina'],['SP','São Paulo'],['SE','Sergipe'],['TO','Tocantins']];
   const DIAS = embaralhar([['segunda', 'Segunda-feira'], ['quarta', 'Quarta-feira'], ['sexta', 'Sexta-feira'], ['domingo', 'Domingo']]);
 
-  // Política primeiro (sem influência das perguntas de perfil); perfil socioeconômico no fim.
+  // Só o que entra nas cotas, na ponderação ou na estimativa. Política antes da escolaridade.
   const PERGUNTAS = [
     { id: 'uf', tipo: 'lista', titulo: 'Em qual estado você vota?', opcoes: UFS, vazio: 'Escolha o estado' },
-    { id: 'idade', tipo: 'numero', titulo: 'Qual é a sua idade?', min: 18, max: 110 },
+    { id: 'idade', tipo: 'numero', titulo: 'Qual é a sua idade?', min: 16, max: 110 },
     { id: 'sexo', titulo: 'Você é:', opcoes: [['feminino', 'Mulher'], ['masculino', 'Homem'], ['outro', 'Outro / prefiro não dizer']] },
     { id: 'voto_2t', titulo: 'Se o 2º turno da eleição para presidente fosse hoje, em quem você votaria?',
       opcoes: [...dupla, ['branco_nulo', 'Votaria em branco ou anularia'], ['nao_sabe', 'Ainda não sei']] },
-    { id: 'certeza_2t', titulo: 'Esse voto já está decidido ou ainda pode mudar?',
-      se: r => r.voto_2t === 'flavio' || r.voto_2t === 'lula',
-      opcoes: [['definitivo', 'Já está decidido'], ['pode_mudar', 'Ainda pode mudar']] },
-    { id: 'rejeicao', titulo: 'Em qual destes você não votaria de jeito nenhum?',
-      opcoes: [...dupla, ['ambos', 'Não votaria em nenhum dos dois'], ['nenhum', 'Poderia votar em qualquer um dos dois'], ['nao_sabe', 'Não sei']] },
     { id: 'votou_1t', titulo: 'Você votou no 1º turno, em 4 de outubro?',
       opcoes: [['sim', 'Sim'], ['nao', 'Não'], ['nao_dizer', 'Prefiro não dizer']] },
     { id: 'voto_1t', titulo: 'Em quem você votou para presidente no 1º turno?', se: r => r.votou_1t === 'sim',
@@ -215,16 +210,9 @@ footer { margin-top: 32px; font-size: .85rem; color: var(--muted); }
     { id: 'chance_votar', titulo: 'Qual a chance de você ir votar no 2º turno, em 25 de outubro?',
       opcoes: [['certeza_sim', 'Vou com certeza'], ['provavel_sim', 'Provavelmente vou'], ['provavel_nao', 'Provavelmente não vou'], ['certeza_nao', 'Com certeza não vou']] },
     { id: 'atencao', titulo: 'Para mostrar que você está lendo com atenção, escolha “Quarta-feira”.', opcoes: DIAS },
-    { id: 'local_moradia', titulo: 'Onde você mora?',
-      opcoes: [['capital', 'Na capital do estado'], ['metropolitana', 'Em outra cidade da região metropolitana da capital'], ['interior', 'No interior']] },
     { id: 'escolaridade', titulo: 'Até onde você estudou?',
       opcoes: [['fund_incompleto', 'Não terminei o ensino fundamental'], ['fund_completo', 'Terminei o fundamental (ou comecei o médio)'],
         ['medio', 'Terminei o ensino médio'], ['superior_incompleto', 'Comecei a faculdade, mas não terminei'], ['superior', 'Terminei a faculdade (ou mais)']] },
-    { id: 'renda', titulo: 'Somando a renda de todos que moram com você, quanto a sua família ganha por mês?',
-      opcoes: [['ate2', 'Até 2 salários mínimos'], ['2a5', 'De 2 a 5 salários mínimos'], ['5a10', 'De 5 a 10 salários mínimos'],
-        ['mais10', 'Mais de 10 salários mínimos'], ['nao_dizer', 'Prefiro não dizer']] },
-    { id: 'religiao', titulo: 'Qual é a sua religião?',
-      opcoes: [['catolica', 'Católica'], ['evangelica', 'Evangélica'], ['outra', 'Outra religião'], ['sem_religiao', 'Não tenho religião'], ['nao_dizer', 'Prefiro não dizer']] },
   ];
 
   const resp = {};
