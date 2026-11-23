@@ -127,6 +127,20 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   border-radius: 1px; pointer-events: none; }
 .barra-linha.comp .barra-val { min-width: 4.6em; text-align: right; }
 .leg-marca { width: 2px !important; height: 14px !important; background: var(--ink); border-radius: 1px !important; }
+.sub-tit { font-size: .875rem; font-weight: 600; color: var(--ink-2); margin-top: 4px; }
+.sexo-barra { display: flex; gap: 2px; height: 30px; border-radius: 6px; overflow: hidden; font-size: .8125rem;
+  font-weight: 600; }
+.sexo-barra > div { display: flex; align-items: center; padding: 0 8px; white-space: nowrap; min-width: 0; overflow: hidden; }
+.sexo-h { background: var(--v2); color: var(--vi2); }
+.sexo-m { background: var(--v1); color: var(--vi1); justify-content: flex-end; }
+.sexo-sal { margin: 0; font-size: .9375rem; }
+.saldo-plot { align-items: stretch; border-bottom: 0; }
+.saldo-col { position: relative; width: 100%; max-width: 30px; height: 100%; }
+.saldo-col > div { position: absolute; left: 0; right: 0; border-radius: 3px; }
+.saldo-pos { background: var(--s1); }
+.saldo-neg { background: var(--s2); }
+.saldo-zero { position: absolute; left: 0; right: 0; border-top: 1px solid var(--axis); pointer-events: none; }
+.banda:hover .saldo-col > div, .banda:focus-visible .saldo-col > div { filter: brightness(1.1); }
 .col.rel { position: relative; }
 .col .idade { background: var(--s1); border-radius: 3px 3px 0 0; }
 .col .marca-h { position: absolute; left: -2px; right: -2px; height: 2px; margin-bottom: -1px; background: var(--ink);
@@ -161,6 +175,11 @@ dialog.ficha::backdrop { background: rgba(8, 22, 27, .55); }
 .ficha-bens td { padding: 5px 0; }
 .ficha-bens td.n { text-align: right; padding-left: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .ficha-pe { padding: 10px 20px 18px; font-size: .875rem; color: var(--ink-2); display: grid; gap: 6px; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; justify-self: start; font-size: .75rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: -8px; }
+.kicker::before { content: ""; width: 18px; height: 4px; border-radius: 2px; background: var(--ipe); }
+.reportar { justify-self: end; font-size: .8125rem; color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+.reportar:hover, .reportar:focus-visible { color: var(--accent); border-color: var(--accent); }
 .historia p { margin: 0; }
 .historia .gentilico { font-size: 1.0625rem; }
 details.mais { display: grid; gap: 12px; font-size: inherit; }
