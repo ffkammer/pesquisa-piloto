@@ -299,6 +299,9 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .sugestoes button { all: unset; display: block; box-sizing: border-box; width: 100%; padding: 7px 10px; border-radius: 6px;
   cursor: pointer; color: var(--ink); }
 .sugestoes button:hover, .sugestoes button:focus-visible { background: var(--accent-wash); }
+/* no topo escuro a lista é branca nos dois temas: texto escuro sempre (no tema escuro, var(--ink) é claro) */
+.hero .sugestoes button { color: #14232a; }
+.hero .sugestoes button:hover, .hero .sugestoes button:focus-visible { background: #fdf3cf; }
 .cmp { --n: 1; margin-top: 24px; display: grid; gap: 0; }
 .cmp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .cmp-chip { display: inline-flex; align-items: center; border: 1px solid var(--axis); border-radius: 999px;
