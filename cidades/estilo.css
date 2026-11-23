@@ -339,6 +339,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .cmp-barra i { display: block; height: 100%; border-radius: 3px; background: var(--s1); }
 .cmp-pos { font-size: .8125rem; color: var(--muted); }
 .cmp-zap { justify-self: start; margin-top: 22px; }
+.par-resumo { margin-top: 28px; gap: 10px; }
+.par-resumo p { margin: 0; font-size: 1.0625rem; }
 @media (max-width: 767px) {
   .cmp-cab, .cmp-linha { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 0 14px; }
   .cmp-cab > .cmp-rot { display: none; }
