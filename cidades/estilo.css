@@ -225,7 +225,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .zap-claro { color: #fff; border-color: rgba(255, 255, 255, .3); }
 .zap-claro:hover { border-color: var(--ipe); }
 .minimapa { margin: 0; display: grid; gap: 8px; justify-items: center; }
-.minimapa-caixa { position: relative; width: min(100%, 360px); }
+.minimapa-caixa { position: relative; width: min(100%, 440px); overflow: hidden; border-radius: 10px; }
 .minimapa img { width: 100%; height: auto; display: block; }
 .marcador { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #fff;
   box-shadow: 0 0 0 3px var(--ipe), 0 0 0 7px rgba(242, 183, 5, .3); }
@@ -235,7 +235,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
     animation: pulso 2.4s ease-out infinite; }
   @keyframes pulso { from { transform: scale(.4); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
 }
-@media (max-width: 860px) { .hero-cidade { grid-template-columns: 1fr; } .minimapa-caixa { width: min(70%, 280px); } }
+@media (max-width: 860px) { .hero-cidade { grid-template-columns: 1fr; } .minimapa-caixa { width: min(100%, 420px); } }
 .cartoes-pos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; margin-top: 24px; }
 .cartoes-pos .cartao { border-top: 4px solid var(--barra); display: grid; gap: 2px; align-content: start; }
 .pct { display: grid; gap: 4px; margin-top: 10px; font-size: .875rem; color: var(--ink-2); }
