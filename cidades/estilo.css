@@ -133,6 +133,34 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   border-radius: 1px; pointer-events: none; }
 .leg-marca-h { width: 14px !important; height: 2px !important; background: var(--ink); border-radius: 1px !important; }
 .eixo-x.anos span:nth-child(n) { left: var(--x) !important; right: auto !important; transform: translateX(-50%) !important; }
+.gov-card { justify-content: center; }
+button.pessoa { all: unset; cursor: pointer; font-weight: 600; color: var(--ink); border-bottom: 1px dashed var(--accent); }
+button.pessoa:hover { color: var(--accent); }
+button.pessoa:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.gov-card button.pessoa { font-size: 1.35rem; }
+.pessoa-sub { display: block; font-size: .875rem; color: var(--ink-2); margin-top: 2px; }
+.gov-card .pessoa-sub { margin-top: 4px; }
+ul.pessoas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px 16px; }
+dialog.ficha { border: 1px solid var(--hair); border-radius: 12px; padding: 0; width: min(600px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px); overflow-y: auto;
+  background: var(--surface); color: var(--ink); box-shadow: 0 18px 50px rgba(0, 0, 0, .25); }
+dialog.ficha::backdrop { background: rgba(8, 22, 27, .55); }
+.ficha-topo { display: flex; justify-content: space-between; align-items: start; gap: 12px; padding: 18px 20px 6px; }
+.ficha-topo h3 { font-size: 1.35rem; margin: 0; }
+.ficha-fechar { all: unset; cursor: pointer; font-size: 1.6rem; line-height: 1; color: var(--ink-2); padding: 0 4px; }
+.ficha-fechar:hover, .ficha-fechar:focus-visible { color: var(--ink); }
+.ficha dl { margin: 0; padding: 8px 20px 4px; display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px;
+  font-size: .9375rem; }
+.ficha dt { color: var(--ink-2); }
+.ficha dd { margin: 0; }
+@media (max-width: 480px) { .ficha dl { grid-template-columns: 1fr; gap: 2px; } .ficha dd { margin-bottom: 8px; } }
+.ficha-bens { padding: 4px 20px 0; }
+.ficha-bens-tit { font-size: .875rem; color: var(--ink-2); margin-top: 6px; }
+.ficha-bens table { margin-top: 4px; font-size: .875rem; }
+.ficha-bens td { padding: 5px 0; }
+.ficha-bens td.n { text-align: right; padding-left: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ficha-pe { padding: 10px 20px 18px; font-size: .875rem; color: var(--ink-2); display: grid; gap: 6px; }
 .historia p { margin: 0; }
 .historia .gentilico { font-size: 1.0625rem; }
 details.mais { display: grid; gap: 12px; font-size: inherit; }
