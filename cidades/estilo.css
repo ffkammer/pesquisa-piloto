@@ -133,6 +133,11 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   border-radius: 1px; pointer-events: none; }
 .leg-marca-h { width: 14px !important; height: 2px !important; background: var(--ink); border-radius: 1px !important; }
 .eixo-x.anos span:nth-child(n) { left: var(--x) !important; right: auto !important; transform: translateX(-50%) !important; }
+.historia p { margin: 0; }
+.historia .gentilico { font-size: 1.0625rem; }
+details.mais { display: grid; gap: 12px; font-size: inherit; }
+details.mais > summary { margin-bottom: 4px; }
+details.mais[open] > p + p { margin-top: 12px; }
 .barra.barra-outras { background: color-mix(in srgb, var(--muted) 55%, transparent); }
 .tel-q { display: grid; gap: 12px; }
 .tabela-q { margin-top: 0; }
