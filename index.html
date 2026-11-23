@@ -3,29 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Brasil Responde</title>
-<meta name="robots" content="noindex">
-<style>
-/* Página provisória enquanto o site é reformulado. */
-:root { --bg: #f6f5f2; --ink: #17201f; --ink-2: #4d5655; --accent: #0f6b6b;
-        --f: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #121615; --ink: #eef2f1; --ink-2: #c2cac8; --accent: #4fb3ad; color-scheme: dark; }
-}
-html, body { margin: 0; background: var(--bg); color: var(--ink); }
-body { font: 400 1.0625rem/1.55 var(--f); min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; }
-main { max-width: 34rem; display: grid; gap: 12px; }
-.marca { font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-h1 { font-size: 1.75rem; line-height: 1.2; margin: 0; }
-p { margin: 0; color: var(--ink-2); }
-a { color: var(--accent); }
-</style>
+<title>Brasil Responde: as cidades do Brasil em números, com renda, empresas e energia de cada município</title>
+<meta name="description" content="Busca e rankings dos municípios brasileiros com dados públicos: população, renda, empresas abertas e ligações de energia.">
+<link rel="canonical" href="https://brasilresponde.com.br/">
+<meta property="og:title" content="Brasil Responde: as cidades do Brasil em números, com renda, empresas e energia de cada município">
+<meta property="og:description" content="Busca e rankings dos municípios brasileiros com dados públicos: população, renda, empresas abertas e ligações de energia.">
+<meta property="og:url" content="https://brasilresponde.com.br/">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/cidades/estilo.css?v=2d3cbc66">
+<script src="/cidades/dicas.js?v=2d3cbc66" defer></script>
+<script src="/cidades/indice.js?v=2d3cbc66" defer></script>
 </head>
 <body>
+<div class="wrap">
+<header class="topo"><a class="marca" href="/">Brasil Responde</a><nav><a href="/">Cidades do Brasil</a></nav></header>
 <main>
-  <span class="marca">Brasil Responde</span>
-  <h1>Site em reformulação</h1>
-  <p>Em breve, novidades por aqui.</p>
+<div class="olho">Sua cidade em números</div>
+<h1>As 5.571 cidades do Brasil em números</h1>
+<p class="lead">População, renda, empresas abertas e ligações de energia de cada município brasileiro, com dados
+públicos do IBGE, da Receita Federal e da ANEEL, comparados com o estado de cada um.</p>
+<div class="busca"><label for="q">Procure sua cidade</label>
+<input id="q" type="search" autocomplete="off" placeholder="Digite o nome da cidade" aria-controls="sug">
+<ul class="sugestoes" id="sug" hidden></ul></div>
+<section><h2>Rankings</h2>
+<div class="filtro" role="group" aria-label="Tamanho da cidade"><button type="button" data-f="" aria-pressed="true">Todas</button><button type="button" data-f="ate20" aria-pressed="false">Até 20 mil moradores</button><button type="button" data-f="20a100" aria-pressed="false">De 20 mil a 100 mil</button><button type="button" data-f="100a500" aria-pressed="false">De 100 mil a 500 mil</button><button type="button" data-f="500mais" aria-pressed="false">Mais de 500 mil</button></div>
+<div class="rankings" id="rk"></div>
+<p class="nota">Cidades pequenas variam muito de um ano para o outro: filtre pelo tamanho para comparar cidades parecidas.</p>
+</section>
+<section><h2>Estados</h2><div class="todas"><a href="/cidades/ac/">Acre <small>· 22 cidades</small></a><a href="/cidades/al/">Alagoas <small>· 102 cidades</small></a><a href="/cidades/ap/">Amapá <small>· 16 cidades</small></a><a href="/cidades/am/">Amazonas <small>· 62 cidades</small></a><a href="/cidades/ba/">Bahia <small>· 417 cidades</small></a><a href="/cidades/ce/">Ceará <small>· 184 cidades</small></a><a href="/cidades/df/brasilia/">Distrito Federal <small>· 1 cidade</small></a><a href="/cidades/es/">Espírito Santo <small>· 78 cidades</small></a><a href="/cidades/go/">Goiás <small>· 246 cidades</small></a><a href="/cidades/ma/">Maranhão <small>· 217 cidades</small></a><a href="/cidades/mt/">Mato Grosso <small>· 142 cidades</small></a><a href="/cidades/ms/">Mato Grosso do Sul <small>· 79 cidades</small></a><a href="/cidades/mg/">Minas Gerais <small>· 853 cidades</small></a><a href="/cidades/pa/">Pará <small>· 144 cidades</small></a><a href="/cidades/pb/">Paraíba <small>· 223 cidades</small></a><a href="/cidades/pr/">Paraná <small>· 399 cidades</small></a><a href="/cidades/pe/">Pernambuco <small>· 185 cidades</small></a><a href="/cidades/pi/">Piauí <small>· 224 cidades</small></a><a href="/cidades/rj/">Rio de Janeiro <small>· 92 cidades</small></a><a href="/cidades/rn/">Rio Grande do Norte <small>· 167 cidades</small></a><a href="/cidades/rs/">Rio Grande do Sul <small>· 497 cidades</small></a><a href="/cidades/ro/">Rondônia <small>· 52 cidades</small></a><a href="/cidades/rr/">Roraima <small>· 15 cidades</small></a><a href="/cidades/sc/">Santa Catarina <small>· 295 cidades</small></a><a href="/cidades/sp/">São Paulo <small>· 645 cidades</small></a><a href="/cidades/se/">Sergipe <small>· 75 cidades</small></a><a href="/cidades/to/">Tocantins <small>· 139 cidades</small></a></div></section>
 </main>
+<div id="dados" data-fonte="/cidades/brasil.json?v=2d3cbc66" hidden></div>
+<footer><span>Brasil Responde · dados públicos, explicados</span><a href="mailto:contato@brasilresponde.com.br">contato@brasilresponde.com.br</a></footer>
+</div>
 </body>
 </html>
