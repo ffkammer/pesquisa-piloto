@@ -113,9 +113,18 @@ th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--hair
 th { font-weight: 600; color: var(--ink-2); }
 td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
 .tabela-rol { overflow-x: auto; }
-.internet { background: transparent; border: 1px solid var(--hair); border-radius: 10px; padding: 14px 16px;
-  font-size: .9375rem; color: var(--ink-2); display: grid; gap: 6px; }
-.internet h3 { color: var(--ink); font-size: 1rem; }
+/* celular, internet e telefone fixo */
+.tel-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; align-items: start; }
+.tel { align-content: start; }
+.tel .painel-tit { font-size: .9375rem; color: var(--ink-2); }
+.tel-num { font-size: 1.6rem; font-weight: 600; line-height: 1.15; margin-top: -8px; }
+.tel-ctx { font-size: .875rem; color: var(--ink-2); margin-top: -10px; min-height: 1.5em; }
+.barra.barra-outras { background: color-mix(in srgb, var(--muted) 55%, transparent); }
+.tel-q { display: grid; gap: 12px; }
+.tabela-q { margin-top: 0; }
+.tabela-q th { vertical-align: bottom; }
+.tabela-q tr.ref td { color: var(--ink-2); border-bottom: 0; }
+section h3 { margin-top: 10px; }
 .perto { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
 .perto a { display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 10px;
   background: var(--surface); text-decoration: none; color: var(--ink); }
