@@ -183,9 +183,9 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .contagem { color: var(--ink-2); font-size: .9375rem; }
 
 /* página inicial */
-.inicio .topo { background: var(--petroleo); margin: 0 -8.1395%; padding: 18px 8.1395%; border-bottom: 0; }
-.inicio .topo .marca { color: var(--ipe); }
-.inicio .topo nav a { color: var(--claro); }
+.topo-escuro .topo { background: var(--petroleo); margin: 0 -8.1395%; padding: 18px 8.1395%; border-bottom: 0; }
+.topo-escuro .topo .marca { color: var(--ipe); }
+.topo-escuro .topo nav a { color: var(--claro); }
 .hero { background: var(--petroleo); color: var(--claro); margin: 0 -8.1395%; padding: 12px 8.1395% 40px;
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 48px; align-items: center; }
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
@@ -218,3 +218,31 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 @media (prefers-reduced-motion: no-preference) {
   #mapa circle { transition: fill .35s ease; }
 }
+/* página da cidade */
+.hero-cidade { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); padding-top: 18px; padding-bottom: 36px; }
+.hero-cidade .trilha, .hero-cidade .trilha a, .hero-cidade .olho { color: var(--claro-2); }
+.hero-cidade h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+.zap-claro { color: #fff; border-color: rgba(255, 255, 255, .3); }
+.zap-claro:hover { border-color: var(--ipe); }
+.minimapa { margin: 0; display: grid; gap: 8px; justify-items: center; }
+.minimapa-caixa { position: relative; width: min(100%, 360px); }
+.minimapa img { width: 100%; height: auto; display: block; }
+.marcador { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #fff;
+  box-shadow: 0 0 0 3px var(--ipe), 0 0 0 7px rgba(242, 183, 5, .3); }
+.minimapa figcaption { font-size: .875rem; color: var(--claro-2); text-align: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .marcador::after { content: ""; position: absolute; inset: -12px; border-radius: 50%; border: 2px solid var(--ipe);
+    animation: pulso 2.4s ease-out infinite; }
+  @keyframes pulso { from { transform: scale(.4); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+}
+@media (max-width: 860px) { .hero-cidade { grid-template-columns: 1fr; } .minimapa-caixa { width: min(70%, 280px); } }
+.cartoes-pos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; margin-top: 24px; }
+.cartoes-pos .cartao { border-top: 4px solid var(--barra); display: grid; gap: 2px; align-content: start; }
+.pct { display: grid; gap: 4px; margin-top: 10px; font-size: .875rem; color: var(--ink-2); }
+.pct-barra { height: 8px; border-radius: 4px; background: var(--barra-fundo); overflow: hidden; }
+.pct-barra i { display: block; height: 100%; background: var(--barra); border-radius: 0 4px 4px 0; }
+.pos { margin: 10px 0 0; display: grid; font-size: .875rem; }
+.pos div { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--hair); padding: 5px 0; }
+.pos dt { color: var(--ink-2); }
+.pos dd { margin: 0; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.pos dd b { color: var(--ink); font-weight: 700; }
