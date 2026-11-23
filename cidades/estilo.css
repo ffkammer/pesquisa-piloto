@@ -181,11 +181,6 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .botao { font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--accent);
   background: transparent; color: var(--accent); cursor: pointer; justify-self: start; }
 .contagem { color: var(--ink-2); font-size: .9375rem; }
-.lista-rk { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
-.lista-rk a { display: grid; gap: 4px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--hair);
-  border-top: 4px solid var(--barra); background: var(--surface); text-decoration: none; color: var(--ink); }
-.lista-rk strong { font-family: var(--f-display); font-stretch: 85%; font-size: 1.25rem; }
-.lista-rk span { color: var(--ink-2); font-size: .9375rem; }
 
 /* página inicial */
 .inicio .topo { background: var(--petroleo); margin: 0 -8.1395%; padding: 18px 8.1395%; border-bottom: 0; }
