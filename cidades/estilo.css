@@ -208,7 +208,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
   border: 1px solid rgba(255, 255, 255, .28); background: transparent; color: var(--claro); }
 .mapa-chips button[aria-pressed="true"] { background: var(--ipe); border-color: var(--ipe); color: #1d1600; font-weight: 600; }
 .mapa-chips button:focus-visible { outline: 2px solid var(--ipe); outline-offset: 2px; }
-#mapa { width: 100%; height: auto; max-height: 78vh; display: block; }
+#mapa { width: 100%; height: auto; max-height: 78vh; display: block; shape-rendering: geometricPrecision; }
 #mapa circle { cursor: pointer; }
 #mapa circle:hover { stroke: #fff; stroke-width: .12; }
 .mapa-leg { display: grid; gap: 6px; font-size: .875rem; color: var(--claro-2); }
@@ -239,6 +239,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .cartoes-pos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; margin-top: 24px; }
 .cartoes-pos .cartao { border-top: 4px solid var(--barra); display: grid; gap: 2px; align-content: start; }
 .pct { display: grid; gap: 4px; margin-top: 10px; font-size: .875rem; color: var(--ink-2); }
+/* subtítulo e frase da barra sempre com duas linhas, para barras e posições ficarem alinhadas entre os cartões */
+.cartoes-pos .ctx, .pct > span:last-child { min-height: 3.1em; line-height: 1.55; }
 .pct-barra { height: 8px; border-radius: 4px; background: var(--barra-fundo); overflow: hidden; }
 .pct-barra i { display: block; height: 100%; background: var(--barra); border-radius: 0 4px 4px 0; }
 .pos { margin: 10px 0 0; display: grid; font-size: .875rem; }

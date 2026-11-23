@@ -5,7 +5,8 @@
   const D = bruto.linhas.map(l => Object.fromEntries(bruto.campos.map((c, i) => [c, l[i]])));
   const RK = bruto.rankings;
   const nf = (v, c = 0) => v.toLocaleString('pt-BR', { minimumFractionDigits: c, maximumFractionDigits: c });
-  const FMT = { taxa: v => nf(v, 1), reais: v => 'R$ ' + nf(v), idh: v => nf(v, 3), um: v => nf(v, 1), pct2: v => nf(v, 2) + '%' };
+  const FMT = { taxa: v => nf(v, 1), reais: v => 'R$ ' + nf(v), idh: v => nf(v, 3), um: v => nf(v, 1),
+    pct1: v => nf(v, 1) + '%', pct2: v => nf(v, 2) + '%' };
   const morad = p => p < 1000 ? nf(p) + ' moradores' : p < 1e6 ? nf(Math.round(p / 1000)) + ' mil moradores'
     : nf(p / 1e6, 1).replace(',0', '') + ' milhões de moradores';
   const url = d => '/cidades/' + d.u + '/' + d.s + '/';
@@ -79,7 +80,8 @@
     svg.setAttribute('viewBox', `0 0 ${((74.2 - 34.6) * k0).toFixed(2)} 39.6`);
     pts = D.filter(d => d.la != null).map(d => {
       const c = document.createElementNS(ns, 'circle');
-      c.setAttribute('cx', X(d.lo).toFixed(2)); c.setAttribute('cy', Y(d.la).toFixed(2)); c.setAttribute('r', '.2');
+      c.setAttribute('cx', X(d.lo).toFixed(2)); c.setAttribute('cy', Y(d.la).toFixed(2)); c.setAttribute('r', '.19');
+      c.setAttribute('stroke', '#0e2a33'); c.setAttribute('stroke-width', '.05');   // contorno na cor do fundo: pontos nítidos
       c._d = d; return c;
     });
     const RAMPA = ['#76611a', '#927819', '#b8961c', '#dcb51f', '#f7d14a', '#fff0b8'], SEM = '#2b4651';
