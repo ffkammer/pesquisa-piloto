@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compare cidades do Brasil lado a lado | Brasil Responde</title>
+<meta name="description" content="Escolha até quatro cidades e compare renda, salário, segurança, IDH, empresas, veículos, internet e quem governa, com dados públicos e a posição de cada uma no Brasil.">
+<link rel="canonical" href="https://brasilresponde.com.br/comparar/">
+<meta property="og:site_name" content="Brasil Responde">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Compare cidades do Brasil lado a lado | Brasil Responde">
+<meta property="og:description" content="Escolha até quatro cidades e compare renda, salário, segurança, IDH, empresas, veículos, internet e quem governa, com dados públicos e a posição de cada uma no Brasil.">
+<meta property="og:url" content="https://brasilresponde.com.br/comparar/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://brasilresponde.com.br/og/padrao.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e2a33">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/cidades/estilo.css?v=9dfd570a">
+<script src="/cidades/dicas.js?v=9dfd570a" defer></script>
+<script src="/cidades/comparar.js?v=9dfd570a" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Início", "item": "https://brasilresponde.com.br/"}, {"@type": "ListItem", "position": 2, "name": "Comparar cidades", "item": "https://brasilresponde.com.br/comparar/"}]}</script>
+</head>
+<body class="topo-escuro">
+<div class="wrap">
+<header class="topo"><a class="marca" href="/">Brasil Responde</a><nav><a href="/rankings/">Rankings</a><a href="/comparar/">Comparar</a><a href="/#estados">Estados</a></nav></header>
+<main>
+<section class="hero hero-comparar" aria-label="Comparar cidades">
+<div>
+<div class="trilha"><a href="/">Início</a> › Comparar cidades</div>
+<h1>Compare cidades lado a lado</h1>
+<p class="hero-lead">Escolha até quatro cidades no computador ou duas no celular. O ponto amarelo marca a melhor de cada linha.</p>
+<div class="busca"><label for="cmp-q">Adicionar cidade</label>
+<input id="cmp-q" type="search" autocomplete="off" placeholder="Digite o nome da cidade" aria-controls="cmp-sug">
+<ul class="sugestoes" id="cmp-sug" hidden></ul></div>
+</div>
+</section>
+<div id="cmp" class="cmp" data-fonte="/cidades/comparar.json" aria-live="polite"><p class="nota">Carregando os dados das cidades…</p></div>
+<p class="nota">Fontes: as mesmas das páginas de cada cidade (IBGE, Ministério da Justiça, Receita Federal, ANEEL,
+Senatran, Anatel e TSE). A posição é entre as cidades do Brasil com o dado.</p>
+</main>
+<footer><span>Brasil Responde: dados públicos, explicados.</span><a href="mailto:contato@brasilresponde.com.br">contato@brasilresponde.com.br</a></footer>
+</div>
+</body>
+</html>
