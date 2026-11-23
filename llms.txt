@@ -1,0 +1,10 @@
+# Brasil Responde
+
+> Dados públicos dos 5.571 municípios brasileiros, explicados: população, renda por pessoa, salário médio, homicídios, PIB por habitante, IDH, empresas abertas e energia solar, com rankings por estado e tamanho de cidade.
+
+- [Página inicial](https://brasilresponde.com.br/): mapa, busca e rankings do Brasil
+- [Rankings](https://brasilresponde.com.br/rankings/): cidades mais seguras, maior renda, salário, PIB por habitante, IDH e outros
+- Página de cada cidade: https://brasilresponde.com.br/cidades/{uf}/{cidade}/ (ex.: /cidades/sp/campinas/)
+- Dados resumidos de todas as cidades: https://brasilresponde.com.br/cidades/brasil.json
+
+Fontes: IBGE (Censo 2022, estimativas de população, PIB dos Municípios, Cadastro Central de Empresas), DATASUS (Sistema de Informações sobre Mortalidade), Atlas do Desenvolvimento Humano (IDHM 2010), Receita Federal (CNPJ), ANEEL e Anatel.
