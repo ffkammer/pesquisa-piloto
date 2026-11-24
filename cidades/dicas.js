@@ -60,3 +60,80 @@
   }
   document.addEventListener('click', ev => { const b = ev.target.closest('button.pessoa[data-i]'); if (b) abre(b); });
 })();
+// "Reportar dado incorreto": completa o e-mail com a cidade, a seção e o endereço da página na hora do clique
+document.addEventListener('click', ev => {
+  const a = ev.target.closest('a.reportar[data-sec]'); if (!a) return;
+  const cidade = (document.querySelector('main[data-cidade]') || {}).dataset?.cidade || document.title;
+  const assunto = `Dado incorreto: ${cidade} - ${a.dataset.tema}`;
+  const corpo = `Página: ${location.origin}${location.pathname}\nSeção: ${a.dataset.sec}\n\nO que está errado:\n\nQual seria o dado certo e a fonte (se souber):\n`;
+  a.href = a.href.split('?')[0] + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+});
+// Previsão do tempo e alertas do INMET, buscados ao abrir a página da cidade. Tudo entra como texto (textContent);
+// a cor do alerta e o ícone só são usados se tiverem o formato esperado.
+(() => {
+  const box = document.getElementById('tempo');
+  if (!box || !/^\d{7}$/.test(box.dataset.cod || '') || !window.fetch) return;
+  const cod = box.dataset.cod, API = 'https://apiprevmet3.inmet.gov.br';
+  const novo = (tag, cls, txt) => { const x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; };
+  const le = (k, ttl) => { try { const x = JSON.parse(sessionStorage.getItem(k)); if (x && Date.now() - x.t < ttl) return x.v; } catch (e) {} return null; };
+  const guarda = (k, v) => { try { sessionStorage.setItem(k, JSON.stringify({ t: Date.now(), v })); } catch (e) {} };
+  async function pega(url, k, ttl, enxuga) {
+    const c = le(k, ttl); if (c) return c;
+    const r = await fetch(url); if (!r.ok) throw new Error(r.status);
+    const v = enxuga(await r.json()); guarda(k, v); return v;
+  }
+  const icone = s => typeof s === 'string' && /^data:image\/(png|gif|jpeg);base64,[A-Za-z0-9+/=]+$/.test(s) ? s : '';
+  const quando = s => { const m = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/.exec(s || ''); return m ? `${m[3]}/${m[2]} às ${m[4]}h${m[5] !== '00' ? m[5] : ''}` : ''; };
+  const mostra = () => { box.hidden = false; };
+  const alertas = pega(API + '/avisos/ativos', 'inmet-avisos', 15 * 60e3, d => {
+    const out = [], vistos = new Set();
+    for (const g of ['hoje', 'futuro']) for (const a of (d && d[g]) || []) {
+      if (vistos.has(a.id)) continue; vistos.add(a.id);
+      out.push({ d: String(a.descricao || ''), s: String(a.severidade || ''), c: String(a.aviso_cor || ''), i: a.inicio, f: a.fim,
+        r: (a.riscos || []).map(String), n: (a.instrucoes || []).map(String), g: String(a.geocodes || '') });
+    }
+    return out;
+  }).then(lista => {
+    const meus = lista.filter(a => a.g.split(',').includes(cod));
+    if (!meus.length) return;
+    const caixa = novo('div', 'tempo-alertas'); caixa.setAttribute('role', 'region');
+    caixa.setAttribute('aria-label', 'Alertas do INMET');
+    caixa.append(novo('div', 'tempo-tit', `Alertas do INMET para ${box.dataset.nome || 'a cidade'}`));
+    for (const a of meus) {
+      const el = novo('details', 'alerta');
+      if (/^#[0-9a-fA-F]{6}$/.test(a.c)) el.style.setProperty('--cor', a.c);
+      const sm = novo('summary'); sm.append(novo('i', 'alerta-cor'), novo('b', '', a.d),
+        novo('span', 'alerta-sev', a.s ? ' · ' + a.s.toLowerCase() : ''), novo('span', 'alerta-quando', `${quando(a.i)} até ${quando(a.f)}`));
+      el.append(sm);
+      if (a.r.length) el.append(novo('p', '', a.r.join(' ')));
+      if (a.n.length) { const ul = novo('ul'); for (const t of a.n) ul.append(novo('li', '', t.trim())); el.append(ul); }
+      caixa.append(el);
+    }
+    box.prepend(caixa); mostra();
+  }).catch(() => {});
+  pega(API + '/previsao/' + cod, 'inmet-prev-' + cod, 60 * 60e3, d => {
+    const dias = (d && d[cod]) || {}, out = [];
+    for (const [data, v] of Object.entries(dias)) {
+      const p = v.tarde || v.manha || v;
+      out.push({ data, sem: String(p.dia_semana || ''), max: p.temp_max, min: p.temp_min, res: String(p.resumo || ''), ic: icone(p.icone) });
+    }
+    return out.slice(0, 5);
+  }).then(dias => {
+    if (!dias.length) return;
+    const prev = novo('div', 'tempo-prev');
+    prev.append(novo('div', 'tempo-tit', 'Previsão do tempo para os próximos dias (INMET)'));
+    const linha = novo('div', 'tempo-dias');
+    dias.forEach((x, i) => {
+      const el = novo('div', 'dia');
+      const nome = i === 0 ? 'Hoje' : i === 1 ? 'Amanhã' : (x.sem.split('-')[0] || x.data.slice(0, 5));
+      el.append(novo('div', 'dia-nome', nome));
+      if (x.ic) { const im = novo('img'); im.src = x.ic; im.alt = ''; im.width = 44; im.height = 44; el.append(im); }
+      const t = novo('div', 'dia-temp');
+      if (Number.isFinite(+x.max)) t.append(novo('b', '', `${Math.round(+x.max)}°`));
+      if (Number.isFinite(+x.min)) t.append(novo('span', '', ` / ${Math.round(+x.min)}°`));
+      el.append(t, novo('div', 'dia-res', x.res));
+      linha.append(el);
+    });
+    prev.append(linha); box.append(prev); mostra();
+  }).catch(() => {});
+})();

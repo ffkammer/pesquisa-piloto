@@ -390,3 +390,59 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair);
 .pos dt { color: var(--ink-2); }
 .pos dd { margin: 0; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink-2); }
 .pos dd b { color: var(--ink); font-weight: 700; }
+/* ficha, crimes, contas, clima, previsão e alertas */
+.hero-gent { margin-top: 10px; color: var(--claro-2); font-size: 1rem; }
+.hero-gent b { color: var(--claro); font-weight: 700; }
+.ficha-tab th[scope="row"], table.crimes th[scope="row"], .traj-tab th[scope="row"] { font-weight: 400; color: var(--ink); }
+.ficha-tab small { color: var(--muted); font-size: .8125rem; }
+.ficha-tab td.n small { color: var(--ink-2); }
+.barra.barra-2 { background: var(--s2); }
+.col.par { flex-direction: row; align-items: flex-end; justify-content: center; gap: 1px; max-width: 26px; }
+.col.par > div { flex: 1; border-radius: 2px 2px 0 0; min-height: 0; }
+.col.par .ab { background: var(--s1); }
+.col.par .bx { background: var(--s2); }
+.banda:hover .col.par > div, .banda:focus-visible .col.par > div { filter: brightness(1.1); }
+.so-uf { margin-top: 2px; }
+table.crimes { margin-top: 0; }
+table.crimes tr.grupo th { padding-top: 16px; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--axis); }
+table.crimes tbody:first-of-type tr.grupo th { padding-top: 8px; }
+.alerta summary { cursor: pointer; }
+.alerta summary::after { content: "▾"; color: var(--accent); margin-left: 4px; }
+.alerta[open] summary::after { content: "▴"; }
+.so-uf .nota { margin-top: 8px; }
+:root { --chuva: var(--s1); --seco: var(--v0); --ar: var(--v3); }
+.col .ar { background: var(--ar); border-radius: 3px 3px 0 0; }
+.col .ar-alto { background: var(--s2); border-radius: 3px 3px 0 0; }
+.col .chuva { background: var(--chuva); border-radius: 3px 3px 0 0; }
+.clima-linha { grid-column: 1 / -1; display: grid; grid-template-columns: 44px 1fr; gap: 0 8px; align-items: center; margin-top: 6px; }
+.clima-rot { font-size: .75rem; color: var(--muted); text-align: right; line-height: 1.1; }
+.temp-faixa { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2px; }
+.temp-cel { font-size: .75rem; font-weight: 700; text-align: center; padding: 4px 0; border-radius: 4px; }
+.ur-cel { font-size: .75rem; text-align: center; padding: 4px 0; border-radius: 4px; background: var(--accent-wash); color: var(--ink-2); }
+.ur-cel.seco { background: var(--seco); color: #0b0b0b; font-weight: 700; }
+.eixo-x.meses12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); height: auto; }
+.eixo-x.meses12 span { position: static !important; transform: none !important; text-align: center; }
+.leg-temp { background: linear-gradient(90deg, #4a8bd1, #7fc0d6, #f3d06b, #eda13a, #e0702e); }
+.tempo { margin-top: 22px; display: grid; gap: 10px; }
+.tempo-alertas { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 12px 16px;
+  display: grid; gap: 6px; }
+.alerta { border-top: 1px solid var(--hair); padding-top: 6px; font-size: .9375rem; }
+.alerta summary { color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
+.alerta summary::marker, .alerta summary::-webkit-details-marker { color: var(--accent); }
+.alerta-cor { width: 12px; height: 12px; border-radius: 3px; background: var(--cor, #eda100); display: inline-block;
+  align-self: center; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
+.alerta-sev { color: var(--ink-2); }
+.alerta-quando { color: var(--ink-2); font-size: .875rem; margin-left: auto; }
+.alerta p { margin-top: 6px; color: var(--ink-2); }
+.alerta ul { margin: 6px 0 4px; padding-left: 18px; color: var(--ink-2); }
+.tempo-prev { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 12px 16px; display: grid; gap: 8px; }
+.tempo-tit { font-size: .875rem; font-weight: 600; color: var(--ink-2); }
+.tempo-dias { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 560px) { .tempo-dias { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(96px, 1fr);
+  overflow-x: auto; scroll-snap-type: x mandatory; } .dia { scroll-snap-align: start; } }
+.dia { display: grid; justify-items: center; align-content: start; gap: 2px; text-align: center; font-size: .875rem; }
+.dia-nome { font-weight: 600; }
+.dia img { width: 44px; height: 44px; }
+.dia-temp b { font-size: 1.05rem; }
+.dia-temp span { color: var(--ink-2); }
+.dia-res { font-size: .75rem; color: var(--ink-2); line-height: 1.25; }

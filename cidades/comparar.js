@@ -10,7 +10,7 @@
   const nf = (v, c = 0) => v.toLocaleString('pt-BR', { minimumFractionDigits: c, maximumFractionDigits: c });
   const FMT = { int: v => nf(v), reais: v => 'R$ ' + nf(v), idh: v => nf(v, 3), taxa: v => nf(v, 1), um: v => nf(v, 1),
     pct0: v => nf(v) + '%', pct1: v => nf(v, 1) + '%', pct2: v => nf(v, 2) + '%', anos: v => nf(v, 1) + ' anos',
-    mbps: v => nf(v) + ' Mbps', txt: v => v };
+    mbps: v => nf(v) + ' Mbps', txt: v => v, graus: v => nf(v, 1) + ' °C', mm: v => nf(v) + ' mm' };
   const novo = (tag, cls, txt) => { const x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; };
   const celular = matchMedia('(max-width: 767px)');
   const limite = () => celular.matches ? 2 : 4;
